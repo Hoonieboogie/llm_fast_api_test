@@ -2,21 +2,28 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>🚗 초보운전자 RAG 챗봇</title>
+  <title>🚦 초보운전자 챗봇 (Runpod RAG)</title>
   <style>
     body { font-family: sans-serif; max-width: 700px; margin: 40px auto; line-height: 1.6; }
-    input, button { padding: 8px; font-size: 1em; }
+    input, button, select { padding: 8px; font-size: 1em; }
     .chat-box { border: 1px solid #ccc; padding: 15px; border-radius: 10px; margin-top: 20px; }
     .user { color: #007bff; font-weight: bold; }
     .bot { color: #333; margin-top: 10px; }
   </style>
 </head>
 <body>
-  <h1>🚦 초보운전자 챗봇 (Runpod RAG)</h1>
+  <h1>🚗 초보운전자 챗봇 (Runpod RAG)</h1>
+
   <form method="POST">
     {% csrf_token %}
-    <input type="text" name="message" size="50" placeholder="질문을 입력하세요" required>
-    <button type="submit">보내기</button>
+    <div>
+      <select name="mode">
+        <option value="law" {% if selected_mode == "law" %}selected{% endif %}>⚖️ 법률 모드</option>
+        <option value="manual" {% if selected_mode == "manual" %}selected{% endif %}>📘 매뉴얼 모드</option>
+      </select>
+      <input type="text" name="message" size="50" placeholder="질문을 입력하세요" required>
+      <button type="submit">보내기</button>
+    </div>
   </form>
 
   {% if user_message %}
