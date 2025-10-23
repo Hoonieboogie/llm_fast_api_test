@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>🚗 초보운전자 RAG 챗봇</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 40px auto; line-height: 1.6; }
+    input, button { padding: 8px; font-size: 1em; }
+    .chat-box { border: 1px solid #ccc; padding: 15px; border-radius: 10px; margin-top: 20px; }
+    .user { color: #007bff; font-weight: bold; }
+    .bot { color: #333; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>🚦 초보운전자 챗봇 (Runpod RAG)</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <input type="text" name="message" size="50" placeholder="질문을 입력하세요" required>
+    <button type="submit">보내기</button>
+  </form>
+
+  {% if user_message %}
+  <div class="chat-box">
+    <div class="user">👤 사용자: {{ user_message }}</div>
+    <div class="bot">🤖 챗봇: {{ answer }}</div>
+  </div>
+  {% endif %}
+</body>
+</html>
